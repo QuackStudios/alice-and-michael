@@ -452,6 +452,24 @@
   line-height: 1.5;
 }
 
+.lookup-footer .lookup-footer__credit {
+  margin-top: 0.25rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.lookup-footer__credit a {
+  padding-bottom: 0.08rem;
+  border-bottom: 1px solid var(--lookup-line);
+  color: var(--lookup-text);
+  transition: border-color 160ms ease;
+}
+
+.lookup-footer__credit a:hover,
+.lookup-footer__credit a:focus-visible {
+  border-color: var(--lookup-text);
+}
+
 .lookup-page .skip-link {
   background: var(--lookup-text);
   color: var(--lookup-bg);

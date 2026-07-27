@@ -1909,6 +1909,27 @@ fieldset {
   color: var(--ink);
 }
 
+.site-footer__credit {
+  margin: 2rem 0 0;
+  color: rgba(255, 253, 248, 0.48);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.site-footer__credit a {
+  padding-bottom: 0.12rem;
+  border-bottom: 1px solid rgba(255, 253, 248, 0.28);
+  color: inherit;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.site-footer__credit a:hover,
+.site-footer__credit a:focus-visible {
+  border-color: var(--chalk);
+  color: var(--chalk);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(2.25rem);

@@ -8,7 +8,7 @@
     searchCacheTtlMilliseconds: 5 * 60 * 1000,
     searchCacheMaximumEntries: 30
   });
-  const SEATING_MAP_URL = "assets/seating/seating-layout-final-calibrated.svg";
+  const SEATING_MAP_URL = "./assets/seating/seating-layout-final-calibrated.svg";
   const YOUR_TABLE_CALLOUT_VERSION = "manual-polygon-arrow-v1";
   const NETWORK_ERROR_MESSAGE =
     "Something went wrong. Please try again or ask the welcome team for help.";

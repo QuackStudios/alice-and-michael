@@ -11,7 +11,7 @@
   demoMode: false,
   workerUrl: "https://wedding-rsvp-worker.andrew-94e.workers.dev"
 };
-  const SEATING_MAP_URL = "assets/seating/seating-layout-final-calibrated.svg";
+  const SEATING_MAP_URL = "./assets/seating/seating-layout-final-calibrated.svg";
   const YOUR_TABLE_CALLOUT_VERSION = "manual-polygon-arrow-v1";
   const DEBUG_YOUR_TABLE_CALLOUT = false;
 

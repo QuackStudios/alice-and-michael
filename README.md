@@ -55,11 +55,12 @@ The form's hidden Wedding ID is `hart-brooks-2026`. It must equal the Worker's `
 
 ## QR Seating Lookup Page
 
-The venue lookup page is available at `/find-table.html`. The wedding QR code
-should point directly to:
+The local page is `./find-table.html`. At the production project path it is
+available at `/alice-and-michael/find-table.html`, and the wedding QR code must
+point directly to:
 
 ```text
-https://quackstudios.github.io/Alice-and-Michael-Wedding_RSVP/find-table.html
+https://weddings.yourinvite.com.au/alice-and-michael/find-table.html
 ```
 
 This is a read-only guest flow. It searches a minimal seating directory stored
@@ -211,7 +212,7 @@ Use `.env.example` as the name checklist:
 | `GHL_API_BASE` | Variable | `https://services.leadconnectorhq.com` |
 | `GHL_API_VERSION` | Variable | `2021-07-28` for the documented integration endpoints used here |
 | `WEDDING_ID` | Variable | `hart-brooks-2026` |
-| `ALLOWED_ORIGIN` | Variable | Exact public origin, e.g. `https://account.github.io` |
+| `ALLOWED_ORIGIN` | Variable | Exact public origin: `https://weddings.yourinvite.com.au` |
 | `DEBUG_KEY` | Optional secret | Long random value enabling protected lookup diagnostics |
 | `SEATING_SYNC_KEY` | Secret | Long random value protecting the seating sync route |
 | `SEATING_LOOKUP_ID_SECRET` | Secret | A different random value used to create opaque lookup IDs |
@@ -220,7 +221,7 @@ Use `.env.example` as the name checklist:
 `ALLOWED_ORIGIN` accepts comma-separated origins if both a preview and custom domain are needed:
 
 ```text
-https://account.github.io,https://wedding.example.com
+https://weddings.yourinvite.com.au,https://preview.example.com
 ```
 
 Do not include a path or trailing slash. Redeploy after adding variables.
@@ -456,10 +457,28 @@ Check the matching contact in GHL after each submission. This Worker does not se
 2. Open **Settings → Pages**.
 3. Under **Build and deployment**, choose **Deploy from a branch**.
 4. Choose the default branch and `/(root)`, then save.
-5. Put the resulting origin into the Worker `ALLOWED_ORIGIN`.
-6. Put the Worker URL in `assets/js/main.js`, set `demoMode: false`, commit and push.
+5. Set the Worker `ALLOWED_ORIGIN` to
+   `https://weddings.yourinvite.com.au` and redeploy that variable change.
+6. Keep the Worker URL in `assets/js/main.js` and
+   `assets/js/find-table.js` set to
+   `https://wedding-rsvp-worker.andrew-94e.workers.dev`.
 
-All site paths are relative, so a GitHub project URL works without rebuilding. See GitHub's [official Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+The production pages are:
+
+```text
+https://weddings.yourinvite.com.au/alice-and-michael/
+https://weddings.yourinvite.com.au/alice-and-michael/find-table.html
+```
+
+Do not add a `CNAME` file to this wedding repository. The custom domain belongs
+to the existing GitHub Pages user-site repository and is inherited by this
+project site. Before publishing the QR code, confirm the user-site repository
+has a valid certificate for `weddings.yourinvite.com.au`, **Enforce HTTPS** is
+enabled, and neither production URL redirects back to HTTP. Local page and
+asset references use explicit `./...` paths, so they continue to resolve beneath
+`/alice-and-michael/` without a rebuild. See GitHub's
+[official Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+and [HTTPS troubleshooting guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages).
 
 ## Security checklist
 

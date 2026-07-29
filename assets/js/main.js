@@ -830,7 +830,7 @@
     }
 
     if (error.status === "multiple_matches") {
-      showFormMessage(error.message || "We found more than one guest with that name. Please add your email or phone number.");
+      showFormMessage(error.message || "We found more than one guest with that name. Please add your last name, email, or phone number.");
       const contact = form.elements.email.value.trim() ? form.elements.phone : form.elements.email;
       contact.focus();
       return;

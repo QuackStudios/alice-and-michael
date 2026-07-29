@@ -463,11 +463,21 @@
     <p>Can’t wait to see you all there!</p>
     <a href="#top" aria-label="Back to top">↑</a>
     <div style="width: 100%; display: flex; justify-content: start; align-items: center;">
-      <p class="site-footer__credit" style="width: 20%; scale: 1.5">
+      <p class="site-footer__credit" style="width: 20%; scale: 1.5;">
       Created by <a href="https://quackstudios.com.au/" target="_blank" rel="noopener noreferrer">Quack Studios</a>
     </p>
     </div>
     
+    <style>
+      @media (max-width: 700px) {
+      .site-footer__credit {
+          display: flex; 
+          flex-direction: column; 
+          align-items: start; 
+          margin-left: 5%;
+        }
+      }
+    </style>
   </footer>
 </body>
 </html>

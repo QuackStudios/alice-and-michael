@@ -241,12 +241,10 @@
     const email = form.elements.email;
     const attendanceFieldset = form.querySelector("fieldset");
 
-    [firstName, lastName].forEach((input) => {
-      const field = input.closest(".field");
-      const isValid = input.value.trim().length >= 1;
-      field.classList.toggle("is-invalid", !isValid);
-      if (!isValid) valid = false;
-    });
+    const firstNameValid = firstName.value.trim().length >= 1;
+    firstName.closest(".field").classList.toggle("is-invalid", !firstNameValid);
+    lastName.closest(".field").classList.remove("is-invalid");
+    if (!firstNameValid) valid = false;
 
     const emailValid = !email.value.trim() || email.validity.valid;
     email.closest(".field").classList.toggle("is-invalid", !emailValid);

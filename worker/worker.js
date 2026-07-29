@@ -1296,8 +1296,8 @@ async function searchGhlContacts(env, guest, fields) {
     if (phoneMatches.length) return phoneMatches;
   }
 
-  const fullName = `${guest.firstName} ${guest.lastName}`.trim();
-  const nameContacts = await searchAndHydrateContacts(env, fullName, "name");
+  const nameQuery = normalizedGuestNameQuery(guest);
+  const nameContacts = await searchAndHydrateContacts(env, nameQuery, "name");
   return filterGuestCandidates(nameContacts, guest, fields, "name", env);
 }
 
@@ -1488,13 +1488,22 @@ function publicTableNumber(value) {
 function filterGuestCandidates(contacts, guest, fields, strategy, env) {
   const weddingField = fields.byName["Wedding ID"];
   const expectedWeddingId = normalizeIdentifier(guest.weddingId);
+  const normalizedFirstName = normalizeName(guest.firstName);
+  const normalizedLastName = normalizeName(guest.lastName);
+  const normalizedFullName = normalizeName(normalizedGuestNameQuery(guest));
 
   const matches = contacts.filter((contact) => {
     // Search summaries do not always repeat locationId. Reject only an
     // explicit different location, never an omitted location.
     const locationMatches = !contact.locationId || contact.locationId === env.GHL_LOCATION_ID;
-    const firstNameMatches = normalizeName(contact.firstName) === normalizeName(guest.firstName);
-    const lastNameMatches = normalizeName(contact.lastName) === normalizeName(guest.lastName);
+    const contactFirstName = normalizeName(contact.firstName);
+    const contactLastName = normalizeName(contact.lastName);
+    const contactFullName = normalizedContactFullName(contact);
+    const nameMatches = normalizedLastName
+      ? contactFirstName === normalizedFirstName && contactLastName === normalizedLastName
+      : contactFirstName === normalizedFirstName ||
+        contactLastName === normalizedFirstName ||
+        contactFullName === normalizedFullName;
     const emailMatches = !guest.email || normalizeEmail(contact.email) === normalizeEmail(guest.email);
     const phoneMatches = !guest.phone || phonesEquivalent(contact.phone, guest.phone);
     const weddingValue = getCustomFieldValue(contact, weddingField);
@@ -1521,14 +1530,34 @@ function filterGuestCandidates(contacts, guest, fields, strategy, env) {
 
     return (
       locationMatches &&
-      firstNameMatches &&
-      lastNameMatches &&
+      nameMatches &&
       strategyIdentityMatches &&
       weddingIdMatches
     );
   });
 
-  return deduplicateContacts(matches);
+  const uniqueMatches = deduplicateContacts(matches);
+  if (normalizedLastName) return uniqueMatches;
+
+  // A free-form value such as "Aunt Ha" is stronger than a match against
+  // only one name field. If it resolves to a full name, discard weaker
+  // first-name or last-name matches before email/phone disambiguation.
+  const exactFullNameMatches = uniqueMatches.filter(
+    (contact) => normalizedContactFullName(contact) === normalizedFullName
+  );
+  return exactFullNameMatches.length ? exactFullNameMatches : uniqueMatches;
+}
+
+function normalizedGuestNameQuery(guest) {
+  return cleanText(`${guest.firstName || ""} ${guest.lastName || ""}`, 160);
+}
+
+function normalizedContactFullName(contact) {
+  const fieldName = cleanText(
+    `${contact?.firstName || ""} ${contact?.lastName || ""}`,
+    160
+  );
+  return normalizeName(fieldName || contact?.name);
 }
 
 function extractContacts(result) {
@@ -1832,8 +1861,8 @@ function validateAndNormalizeInput(raw, env) {
   const dietaryRequirement = cleanText(raw.dietaryRequirement, 100) || "No dietary requirements";
   const dietaryNotes = cleanText(raw.dietaryNotes, 500);
 
-  if (!firstName || !lastName) {
-    return { ok: false, message: "First name and last name are required." };
+  if (!firstName) {
+    return { ok: false, message: "First name is required." };
   }
   if (!attending) {
     return { ok: false, message: "Please select whether you are attending." };

@@ -867,3 +867,190 @@
     form.elements.firstName.focus();
   });
 })();
+
+// Static public guest directory. This is intentionally independent of the
+// RSVP Worker, GHL and the private find-table lookup.
+(() => {
+  const list = document.querySelector("[data-guest-list]");
+  const status = document.querySelector("[data-guest-list-status]");
+  const total = document.querySelector("[data-guest-total]");
+  const search = document.querySelector("[data-guest-search]");
+  const floorplan = document.querySelector(".floorplan-panel__map");
+  if (!list || !status || !total || !search || !floorplan) return;
+
+  let floorplanSvg = null;
+  let selectedTable = "";
+
+  function setHighlightedTable(tableNumber) {
+    if (!floorplanSvg) return;
+    floorplanSvg.querySelectorAll(".guest-table[data-table]").forEach((table) => {
+      table.classList.toggle(
+        "is-highlighted",
+        table.dataset.table === String(tableNumber || "")
+      );
+    });
+  }
+
+  function selectTable(card) {
+    const tableNumber = card.dataset.tableNumber;
+    selectedTable = selectedTable === tableNumber ? "" : tableNumber;
+    list.querySelectorAll(".guest-table-group").forEach((group) => {
+      group.setAttribute(
+        "aria-pressed",
+        String(group.dataset.tableNumber === selectedTable)
+      );
+    });
+    setHighlightedTable(selectedTable);
+  }
+
+  function bindTableInteraction(card) {
+    card.addEventListener("mouseenter", () => {
+      setHighlightedTable(card.dataset.tableNumber);
+    });
+    card.addEventListener("mouseleave", () => {
+      setHighlightedTable(selectedTable);
+    });
+    card.addEventListener("focus", () => {
+      setHighlightedTable(card.dataset.tableNumber);
+    });
+    card.addEventListener("blur", () => {
+      setHighlightedTable(selectedTable);
+    });
+    card.addEventListener("click", () => selectTable(card));
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      selectTable(card);
+    });
+  }
+
+  function renderDirectory(directory) {
+    if (
+      directory?.weddingId !== "alice-and-michael-2026" ||
+      !Array.isArray(directory.tables)
+    ) {
+      throw new Error("Guest seating data has an invalid structure or wedding ID.");
+    }
+
+    const fragment = document.createDocumentFragment();
+    let renderedGuestCount = 0;
+    const tableNumbers = new Set();
+
+    directory.tables.forEach((table) => {
+      const tableNumber = String(table?.tableNumber ?? "").trim();
+      if (
+        !tableNumber ||
+        tableNumbers.has(tableNumber) ||
+        !Array.isArray(table.guests)
+      ) {
+        throw new Error("Guest seating data contains an invalid table.");
+      }
+      tableNumbers.add(tableNumber);
+
+      const card = document.createElement("article");
+      card.className = "guest-table-group";
+      card.dataset.tableNumber = tableNumber;
+      card.dataset.guestSearch = table.guests.join("\n").toLocaleLowerCase();
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-pressed", "false");
+      card.setAttribute("aria-label", `Highlight Table ${tableNumber} on the floorplan`);
+
+      const header = document.createElement("header");
+      const heading = document.createElement("h4");
+      const count = document.createElement("span");
+      const names = document.createElement("ul");
+      heading.textContent = `Table ${tableNumber}`;
+      count.textContent = `${table.guests.length} ${table.guests.length === 1 ? "guest" : "guests"}`;
+      header.append(heading, count);
+
+      table.guests.forEach((guestName) => {
+        const item = document.createElement("li");
+        item.textContent = String(guestName);
+        names.append(item);
+        renderedGuestCount += 1;
+      });
+
+      card.append(header, names);
+      bindTableInteraction(card);
+      fragment.append(card);
+    });
+
+    if (
+      Number(directory.guestCount) !== renderedGuestCount ||
+      directory.tables.some((table) => Number(table.guestCount) !== table.guests.length)
+    ) {
+      throw new Error("Guest seating counts do not match the supplied directory.");
+    }
+
+    list.replaceChildren(fragment);
+    total.textContent = `${renderedGuestCount} guests`;
+    total.hidden = false;
+    search.disabled = false;
+    status.hidden = true;
+  }
+
+  function filterDirectory() {
+    const query = search.value.trim().toLocaleLowerCase();
+    let visibleTables = 0;
+    list.querySelectorAll(".guest-table-group").forEach((card) => {
+      const matches = !query || card.dataset.guestSearch.includes(query);
+      card.hidden = !matches;
+      if (matches) visibleTables += 1;
+    });
+
+    status.textContent = query
+      ? `${visibleTables} ${visibleTables === 1 ? "table" : "tables"} match your search.`
+      : "";
+    status.hidden = !query;
+  }
+
+  async function loadDirectory() {
+    const response = await fetch("./assets/data/guest-seating.json");
+    if (!response.ok) {
+      throw new Error(`Guest seating request failed with HTTP ${response.status}.`);
+    }
+    renderDirectory(await response.json());
+  }
+
+  async function loadInteractiveFloorplan() {
+    const response = await fetch("./assets/seating/seating-layout-final-calibrated.svg");
+    if (!response.ok) {
+      throw new Error(`Floorplan request failed with HTTP ${response.status}.`);
+    }
+
+    const documentSvg = new DOMParser()
+      .parseFromString(await response.text(), "image/svg+xml")
+      .documentElement;
+    if (documentSvg.localName !== "svg") {
+      throw new Error("Floorplan response was not valid SVG.");
+    }
+
+    documentSvg.removeAttribute("width");
+    documentSvg.removeAttribute("height");
+    documentSvg.classList.add("public-seating-svg");
+    documentSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    documentSvg.querySelectorAll(".guest-table[data-table]").forEach((table) => {
+      table.setAttribute("aria-hidden", "true");
+      table.setAttribute("focusable", "false");
+    });
+
+    floorplanSvg = document.importNode(documentSvg, true);
+    floorplan.replaceChildren(floorplanSvg);
+  }
+
+  search.addEventListener("input", filterDirectory);
+
+  loadDirectory().catch((error) => {
+    console.error("Unable to load public guest seating directory:", error);
+    list.replaceChildren();
+    total.hidden = true;
+    search.disabled = true;
+    status.hidden = false;
+    status.textContent = "The guest seating list is temporarily unavailable. Please use the RSVP or Find Your Table feature above.";
+  });
+
+  loadInteractiveFloorplan().catch((error) => {
+    console.error("Unable to enable public floorplan highlighting:", error);
+  });
+})();

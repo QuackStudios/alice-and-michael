@@ -1728,6 +1728,50 @@ fieldset {
   text-transform: uppercase;
 }
 
+.guest-list-search {
+  padding: 1rem clamp(1.35rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.guest-list-search label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--ink-soft);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.guest-list-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.65rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+}
+
+.guest-list-search input:focus {
+  border-bottom-color: var(--olive);
+}
+
+.guest-list-search input:disabled {
+  opacity: 0.55;
+}
+
+.guest-list-panel__status {
+  margin: 0;
+  padding: 1.4rem clamp(1.35rem, 3vw, 2rem);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
 .guest-list-panel__scroll {
   max-height: 36rem;
   overflow-y: auto;
@@ -1757,6 +1801,18 @@ fieldset {
 .guest-table-group {
   padding: 1.4rem clamp(1.35rem, 3vw, 2rem) 1.5rem;
   border-bottom: 1px solid var(--line);
+  outline: 0;
+  transition: background-color 180ms ease;
+}
+
+.guest-table-group:hover,
+.guest-table-group:focus-visible,
+.guest-table-group[aria-pressed="true"] {
+  background: rgba(83, 83, 73, 0.07);
+}
+
+.guest-table-group:focus-visible {
+  box-shadow: inset 3px 0 0 var(--olive);
 }
 
 .guest-table-group:last-child {
@@ -1799,14 +1855,11 @@ fieldset {
   list-style: none;
 }
 
-.guest-table-group--head {
-  background: var(--ink);
-  color: var(--chalk);
-}
-
-.guest-table-group--head header span,
-.guest-table-group--head ul {
-  color: rgba(255, 253, 248, 0.68);
+.floorplan-panel__map .public-seating-svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 .contact {
@@ -2327,6 +2380,11 @@ fieldset {
     object-fit: contain;
   }
 
+  .floorplan-panel__map .public-seating-svg {
+    width: auto;
+    height: 100%;
+  }
+
   .guest-list-panel__scroll {
     max-height: 45.9rem;
   }
@@ -2339,6 +2397,13 @@ fieldset {
 
   .site-menu::after {
     display: none;
+  }
+}
+
+@media (max-width: 61.99rem) {
+  .guest-list-panel__scroll {
+    max-height: none;
+    overflow-y: visible;
   }
 }
 

@@ -1,0 +1,398 @@
+{
+  "weddingId": "alice-and-michael-2026",
+  "guestCount": 242,
+  "tables": [
+    {
+      "tableNumber": "1",
+      "guestCount": 9,
+      "guests": [
+        "Aunt HA",
+        "Uncle Hoac",
+        "Aunt Cuc",
+        "Uncle Luc",
+        "Aunt Amy",
+        "Uncle Jeff",
+        "Aunt Trinh",
+        "Uncle Lap",
+        "Kevins GRANDPA"
+      ]
+    },
+    {
+      "tableNumber": "2",
+      "guestCount": 8,
+      "guests": [
+        "Mother OF THE BRIDE",
+        "Bride’s FATHER",
+        "Mother OF THE GROOM",
+        "Groom’s FATHER",
+        "Uncle Huy",
+        "Aunt Qing",
+        "Co Chanh",
+        "Duong Thanh"
+      ]
+    },
+    {
+      "tableNumber": "3",
+      "guestCount": 8,
+      "guests": [
+        "Di Si Nai",
+        "Co Hong",
+        "Co Trang",
+        "Co Thuy",
+        "Cindy",
+        "Alan",
+        "Co Linh LE",
+        "Chu Nhat PHAM"
+      ]
+    },
+    {
+      "tableNumber": "4",
+      "guestCount": 10,
+      "guests": [
+        "Uncle Hung",
+        "Aunt Phung",
+        "Uncle Ngo",
+        "Aunt Dao",
+        "Uncle Loi",
+        "Aunt Hu",
+        "Uncle Hoan",
+        "Aunt Pei-ning",
+        "Bac Thuy",
+        "Bac Loc"
+      ]
+    },
+    {
+      "tableNumber": "5",
+      "guestCount": 10,
+      "guests": [
+        "Loi GIANG",
+        "Nikky GIANG",
+        "Kim GIANG",
+        "Thuan NGUYEN",
+        "Rebecca BOXALL",
+        "Lance BOXALL",
+        "Donna THONG",
+        "Somah THONG",
+        "Ben TRUONG",
+        "Jenny DIXON"
+      ]
+    },
+    {
+      "tableNumber": "6",
+      "guestCount": 10,
+      "guests": [
+        "Robert LEE",
+        "Dianne TRAN",
+        "Ronnie TRAN",
+        "Mande LE",
+        "Daniel THAI",
+        "Nancy NGUYEN",
+        "Justin NGUYEN",
+        "Adeline TIRTAWATY",
+        "Neilson GIANG",
+        "Marilyn TRAN"
+      ]
+    },
+    {
+      "tableNumber": "7",
+      "guestCount": 10,
+      "guests": [
+        "Bac Canh DANG",
+        "Bac Hoanh Anh Nguyen",
+        "Bac Anh Tai TRAN",
+        "Co Kieu TRAN",
+        "Duong An NGUYEN",
+        "Chu Tri TRAN",
+        "Bac Hien TRAN",
+        "Bac Catherine TRAN",
+        "Bac Tuan",
+        "Chu 3"
+      ]
+    },
+    {
+      "tableNumber": "8",
+      "guestCount": 10,
+      "guests": [
+        "Bac Phuc",
+        "Bac Binh",
+        "Co Huong",
+        "Duong Thanh",
+        "Ngan PHAN",
+        "Hai GIANG",
+        "Co Dung HUYNH",
+        "Duong Phuong NGUYEN",
+        "Bac Hai",
+        "Bac Kha"
+      ]
+    },
+    {
+      "tableNumber": "9",
+      "guestCount": 10,
+      "guests": [
+        "Aunt Susan",
+        "Uncle Tim",
+        "Aunt Vi",
+        "Mikeala YUEN",
+        "Lachlan YUEN",
+        "Liam YUEN",
+        "Nhung NGUYEN",
+        "Danh",
+        "Lan VUONG",
+        "Erlinda ESPINOZA"
+      ]
+    },
+    {
+      "tableNumber": "10",
+      "guestCount": 9,
+      "guests": [
+        "Co QUYNH NGUYEN",
+        "Danny VU",
+        "Hieu HUYNH",
+        "Mo Ha NGUYEN",
+        "Chu Steven",
+        "Jenny Anh HUYNH",
+        "Andy Anh HUYNH",
+        "Vinh HUYNH",
+        "Hanh HUYNH"
+      ]
+    },
+    {
+      "tableNumber": "11",
+      "guestCount": 9,
+      "guests": [
+        "Danny THAI",
+        "Natalie LIU",
+        "Shelly THAI",
+        "Julie SHACKLETON",
+        "Richard SHACKLETON",
+        "David TRAN",
+        "Alice SUNG",
+        "Amy THAI",
+        "Minh THAI"
+      ]
+    },
+    {
+      "tableNumber": "12",
+      "guestCount": 10,
+      "guests": [
+        "Hilton GIANG",
+        "Jamie MA",
+        "Dalton GIANG",
+        "Min-yi",
+        "Nhut NGUYEN",
+        "Chau NGUYEN",
+        "Huy NGUYEN",
+        "Andy GIANG",
+        "Duy NGUYEN",
+        "Kevin GIANG"
+      ]
+    },
+    {
+      "tableNumber": "13",
+      "guestCount": 10,
+      "guests": [
+        "Jolene TRUONG",
+        "Haigen",
+        "Daniel TRUONG",
+        "Vi NGUYEN",
+        "Huy NGUYEN",
+        "Vinh DAM",
+        "Sandy LY",
+        "Vy DAM",
+        "Thuan NGUYEN",
+        "Celina NGUYEN"
+      ]
+    },
+    {
+      "tableNumber": "14",
+      "guestCount": 9,
+      "guests": [
+        "Chu Tan",
+        "Yanny",
+        "Neary KY",
+        "Phal KOEUN",
+        "Mel KOEUN",
+        "James TAN",
+        "Jessica TAN",
+        "Chu VAN",
+        "Co QUE"
+      ]
+    },
+    {
+      "tableNumber": "15",
+      "guestCount": 10,
+      "guests": [
+        "Camly DANG",
+        "Branagh LAING",
+        "Simrat SINGH",
+        "Lawrence LOU",
+        "Trinh LE",
+        "Anna TRAN",
+        "Cassie NGUYEN",
+        "Liam VU",
+        "Jacky CHAN",
+        "Sally GUO"
+      ]
+    },
+    {
+      "tableNumber": "16",
+      "guestCount": 10,
+      "guests": [
+        "Tony HO",
+        "Valerie TAN",
+        "Samuel CHUI",
+        "Hannah TRUONG",
+        "Eddie NGUYEN",
+        "Alisina TOLLO",
+        "Daniel CHEN",
+        "Dayanne CACHO",
+        "William JOSEPH",
+        "Michelle HO"
+      ]
+    },
+    {
+      "tableNumber": "17",
+      "guestCount": 10,
+      "guests": [
+        "San KANG",
+        "CJ LEE",
+        "Tu CONG DINH",
+        "Mojtaba TOLLO",
+        "Leo MATIS",
+        "Andy PHAM",
+        "Jashan SURI",
+        "Mehka SAKAEW",
+        "Sagar NAIDU",
+        "Matthew DE GUZMAN"
+      ]
+    },
+    {
+      "tableNumber": "18",
+      "guestCount": 10,
+      "guests": [
+        "Aaron RAADSCHELDERS",
+        "Caroline RAADSCHELDERS",
+        "Bill ROBERTS",
+        "Julia ROBERTS",
+        "Ron DELANEY",
+        "Barbara DELANEY",
+        "Hasini SENANAYAKE",
+        "Rashan SENANAYAKE",
+        "David MURRAY",
+        "Rose MURRAY"
+      ]
+    },
+    {
+      "tableNumber": "19",
+      "guestCount": 10,
+      "guests": [
+        "Stuart STEELE",
+        "Emma O'GRADY",
+        "Nathan TOZE",
+        "Nikki CROOK",
+        "Olek MUDYK",
+        "Oksana KONOPLITSKA",
+        "Juan MEJIA SALAZAR",
+        "Juanita BARRAGAN",
+        "Eric WANG",
+        "Videographer"
+      ]
+    },
+    {
+      "tableNumber": "20",
+      "guestCount": 10,
+      "guests": [
+        "Ranju ABRAHAMS",
+        "Tai NGUYEN",
+        "Lisa NGUYEN",
+        "Jenny STENT",
+        "Jessica FULKERSON",
+        "Thi anh DANG",
+        "Vu NGUYEN",
+        "Siobhain MCDERMOT",
+        "Christopher GUNNING",
+        "Eloise BETHS"
+      ]
+    },
+    {
+      "tableNumber": "21",
+      "guestCount": 11,
+      "guests": [
+        "Viet TRAN",
+        "Paul WU",
+        "Eugenie HSIEH",
+        "Michael LEE",
+        "Kelly TSANG",
+        "Jose MATEO",
+        "Harrison JONES",
+        "Veeshan THATHIAH",
+        "Ingrid TRONO",
+        "Tuan HA",
+        "Jenny PHAM"
+      ]
+    },
+    {
+      "tableNumber": "22",
+      "guestCount": 10,
+      "guests": [
+        "Bac Lam",
+        "Bac Anna",
+        "Bac Thang",
+        "Vo Bac Thang",
+        "Bac Cuong",
+        "Bac Chau",
+        "Chu Dung",
+        "Co Dung",
+        "Aunt Cindy",
+        "Di Ha"
+      ]
+    },
+    {
+      "tableNumber": "23",
+      "guestCount": 10,
+      "guests": [
+        "David NGUYEN",
+        "Sandy TRAN",
+        "Kevin TANG",
+        "Tony PHONETHIPSVAD",
+        "Anthony THACH",
+        "Holly TRAN",
+        "Quynh PHAM",
+        "Duy NGUYEN",
+        "Yi-ting LAU",
+        "Edwin WONG"
+      ]
+    },
+    {
+      "tableNumber": "24",
+      "guestCount": 10,
+      "guests": [
+        "Austin HUYNH",
+        "Hayden ANTHONY",
+        "Cassandra HUYNH",
+        "Lauren WILLIS",
+        "Vanessa HUYNH",
+        "Ronald TRAN",
+        "Linh NGUYEN",
+        "Nam NGUYEN",
+        "Melissa GIANG",
+        "Jenny GIANG"
+      ]
+    },
+    {
+      "tableNumber": "25",
+      "guestCount": 9,
+      "guests": [
+        "Chloe YUEN",
+        "David PINONTOAN",
+        "Phoebe GIANG",
+        "Sophie NGUYEN",
+        "Api TAEOALLI",
+        "Isaac GIANG",
+        "Abbie GIANG",
+        "Fiona VO",
+        "Baker XU"
+      ]
+    }
+  ]
+}
